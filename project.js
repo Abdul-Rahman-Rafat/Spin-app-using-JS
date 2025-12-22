@@ -85,9 +85,11 @@ for(const [symbol,count] of Object.entries(SYMBOLS_COUNT)){
     }
 }
 // console.log(symbols);
-const reels=[[],[],[]] // the spin 
+// const reels=[[],[],[]] // the spin // if columns number change the code is over 
+const reels=[] // the spin // we make it dynamic
 for(let i =0 ; i<COLS;i++)
 {
+    reels.push([])//after each column so we make it dynamic depend on colmuns number 
     const reelSymbols=[...symbols]; // after each column stop we remove the its values
     for(let j =0 ; j<ROWS;j++){
         const randomIndex = Math.floor(Math.random()*reelSymbols.length)
@@ -100,12 +102,58 @@ for(let i =0 ; i<COLS;i++)
 return reels;
 }
 
-let spin_result = spin();
-console.log(spin_result);
+const transpose = (reels)=>{
+    const rows =[];
+    for(let i = 0 ; i<ROWS; i++){
+        rows.push([]);
+        for(let j = 0 ; j<COLS; j++){
+            rows[i].push(reels[j][i])
+        }
+    }
+    return rows;
+}
+
+const printRows = (rows)=>{
+
+    for(const row of rows){
+        let rowString = "";
+        for(let i=0 ; i<row.length;i++){
+            rowString += row[i];
+            if(i != row.length-1){
+                rowString += " | ";
+            }
+        }
+        console.log(rowString);
+    }
+}
+
+const getWinnings=(rows , lines , bet)=>{
+    let winnings = 0;
+
+    for(let row=0; row<lines; row++){
+        const symbols = rows[row];
+        let allSsame=true;
+        for(const symbol of symbols){
+            if(symbol != symbols[0]){
+                allSsame= false;
+                break;
+            }
+        }
+        if(allSsame){
+            winnings += bet * SYMBOLS_VALUES[symbols[0]];
+        }
+    }
+    return winnings;
+}
+
 
 let deposit_value = deposit();
 let lines_count = getNumberOfLines();
 let totalBet = getBet(deposit_value,lines_count);
+let spin_result = spin();
+let rowsToCol = transpose(spin_result);
 
+printRows(rowsToCol);
 
-console.log(deposit_value , lines_count , totalBet);
+console.log(getWinnings(rowsToCol , lines_count , totalBet))
+
