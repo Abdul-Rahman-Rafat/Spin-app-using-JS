@@ -146,14 +146,27 @@ const getWinnings=(rows , lines , bet)=>{
     return winnings;
 }
 
-
+const game=()=>{
 let deposit_value = deposit();
-let lines_count = getNumberOfLines();
-let totalBet = getBet(deposit_value,lines_count);
-let spin_result = spin();
-let rowsToCol = transpose(spin_result);
+while(true){
+    console.log(`Your balance is : ${deposit_value} $`  ) ;
 
-printRows(rowsToCol);
+    let lines_count = getNumberOfLines();
+    let totalBet = getBet(deposit_value,lines_count);
+    let tmpBalance= deposit_value-totalBet;
+    let spin_result = spin();
+    let rowsToCol = transpose(spin_result);
+    printRows(rowsToCol);
 
-console.log(getWinnings(rowsToCol , lines_count , totalBet))
+    let win_value = getWinnings(rowsToCol , lines_count , totalBet);
+    tmpBalance += win_value;
+    deposit_value = tmpBalance;
+    console.log(`Your balance now is : ${deposit_value} $`  ) ;
 
+    
+    const playAgain = prompt("Do u want to continue playing ? (y/n)");
+    if(playAgain != "y" || playAgain !="Y" || playAgain!= "yes" || playAgain!= "YES")
+        break;
+    }
+
+}
