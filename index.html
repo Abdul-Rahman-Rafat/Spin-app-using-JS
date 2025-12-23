@@ -20,17 +20,19 @@
 
             <div class="screen">
                 <div class="cols">
-                    <div class="col">1</div>
-                    <div class="col">2</div>
-                    <div class="col">3</div>
+                    <!-- js work -->
                 </div>
             </div>
 
-            
+            <div class="message" aria-live="polite"></div>
+
             <div class="btns">
-                <input class="deposit-input" type="text" value="777">
+                <div><label for="deposit-btn-id"> Deposit</label>
+                <input id="deposit-btn-id" class="deposit-input" type="text" value="100" title="Balance"></div>
+                <div><label for="bet-btn-id"> Bet / line</label>
+                <input id="bet-btn-id" class="bet-input" type="number" value="1" min="1" title="Bet per line"></div>
                 <button class="spin-btn">Spin</button>
-                <button class="lines-count-btn">x3</button>
+                <button class="lines-count-btn">x1</button>
             </div>
 
         </div>

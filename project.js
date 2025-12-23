@@ -1,183 +1,239 @@
-//1 deposit some money
-// 2 determine number of lines to bet on
-// 3 collect a bet amount
-// 4 spin the slot machine
-// 5 check if the user won
-// 6 give user their winnings
-// 7 play again
-
-// package to (input) 
-const prompt = require("prompt-sync")();
-
-
-
-
-//4 spin
+// machine size
 const ROWS = 3;
 const COLS = 3;
+//each symbol possible 
+const SYMBOLS_COUNT = {
+    A: 2,
+    B: 4,
+    C: 6,
+    D: 8
+};
 
-const SYMBOLS_COUNT ={
-    A:2,
-    B:4,
-    C:6,
-    D:8
-}
+const SYMBOLS_VALUES = {
+    A: 5,
+    B: 4,
+    C: 3,
+    D: 2
+};
 
-const SYMBOLS_VALUES ={
-    A:5,
-    B:4,
-    C:3,
-    D:2
-}
+const SYMBOLS = Object.keys(SYMBOLS_COUNT);
 
+// DOM elements
+const colsContainer = document.querySelector('.cols');
+const spinBtn = document.querySelector('.spin-btn');
+const depositInput = document.querySelector('.deposit-input');
+const betInput = document.querySelector('.bet-input');
+const linesBtn = document.querySelector('.lines-count-btn');
+const messageEl = document.querySelector('.message');
 
-// 1 deopsit  //what user have to put
-const deposit = ()=>{
-    while(true){
-    const deopsit_amount = prompt("Enter a deposit amount: ")
-    const deopsit_amount_float = parseFloat(deopsit_amount);
-    // console.log(deopsit_amount_float)
-    if(isNaN(deopsit_amount_float)||deopsit_amount_float<=0){
-        console.log("invalid deposit. please try again");
+let linesCount = 1;
+let spinning = false;
+
+function makeReelsDOM() {
+    colsContainer.innerHTML = '';
+    for (let c = 0; c < COLS; c++) {
+        const col = document.createElement('div');
+        col.className = 'col';
+        for (let r = 0; r < ROWS; r++) {
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            cell.textContent = '-';
+            col.appendChild(cell);
         }
-    else{
-        return deopsit_amount_float
-    }
+        colsContainer.appendChild(col);
     }
 }
-// 2 the lines number that user bet on 
-const getNumberOfLines = ()=>{
-    while(true){
-    const lines = prompt("Enter number of lines to bet on (1-3): ")
-    const numbersOfLines = parseInt(lines)
-    // console.log(deopsit_amount_float)
-    if(isNaN(numbersOfLines)||numbersOfLines<=0||numbersOfLines>3){
-        console.log("invalid deposit. please try again");
+
+function buildSymbolsArray() {
+    const arr = [];
+    for (const [sym, count] of Object.entries(SYMBOLS_COUNT)) {
+        for (let i = 0; i < count; i++) arr.push(sym);
+    }
+    return arr;
+}
+
+function spinOnce() {
+  // build reels: COLS arrays each with ROWS symbols (no repeats inside a single reel)
+    const symbols = buildSymbolsArray();
+    const reels = [];
+    for (let i = 0; i < COLS; i++) {
+        const reelSymbols = [...symbols];
+        reels[i] = [];
+        for (let j = 0; j < ROWS; j++) {
+        const idx = Math.floor(Math.random() * reelSymbols.length);
+            reels[i].push(reelSymbols[idx]);
+            reelSymbols.splice(idx, 1);
         }
-    else{
-        return numbersOfLines
     }
-    }
+    return reels;
 }
-
-// 3 the amount that user bet with should be less then his deposit
-const getBet = (deposit_value,linesCount)=>{
-    while(true){
-    const bet = prompt("Enter Total bet per lines: ")
-    const betValue = parseFloat(bet)
-    // console.log(deopsit_amount_float)
-    if(isNaN(betValue)||betValue<=0||betValue>deposit_value/linesCount){
-        console.log("invalid bet. please try again");
-        }
-    else{
-        return betValue
-    }
-    }
-}
-
-//4 spin
-const spin = ()=>{
-let symbols=[]
-
-for(const [symbol,count] of Object.entries(SYMBOLS_COUNT)){
-    for(let i =0;i<count;i++){
-        symbols.push(symbol);
-    }
-}
-// console.log(symbols);
-// const reels=[[],[],[]] // the spin // if columns number change the code is over 
-const reels=[] // the spin // we make it dynamic
-for(let i =0 ; i<COLS;i++)
-{
-    reels.push([])//after each column so we make it dynamic depend on colmuns number 
-    const reelSymbols=[...symbols]; // after each column stop we remove the its values
-    for(let j =0 ; j<ROWS;j++){
-        const randomIndex = Math.floor(Math.random()*reelSymbols.length)
-        // console.log(randomIndex);
-        const selectedIndex=reelSymbols[randomIndex];
-        reels[i].push(selectedIndex); // column by column
-        reelSymbols.splice(randomIndex,1); // remove the value that appeared after each column
-    }
-}
-return reels;
-}
-
-const transpose = (reels)=>{
-    const rows =[];
-    for(let i = 0 ; i<ROWS; i++){
-        rows.push([]);
-        for(let j = 0 ; j<COLS; j++){
-            rows[i].push(reels[j][i])
-        }
+//turn the cols to rows to be able to identify the winning row
+function transpose(reels) {
+    const rows = [];
+    for (let r = 0; r < ROWS; r++) {
+        rows[r] = [];
+        for (let c = 0; c < COLS; c++) rows[r].push(reels[c][r]);
     }
     return rows;
 }
 
-const printRows = (rows)=>{
-
-    for(const row of rows){
-        let rowString = "";
-        for(let i=0 ; i<row.length;i++){
-            rowString += row[i];
-            if(i != row.length-1){
-                rowString += " | ";
-            }
-        }
-        console.log(rowString);
-    }
-}
-
-const getWinnings=(rows , lines , bet)=>{
+function getWinnings(rows, lines, betPerLine) {
     let winnings = 0;
-
-    for(let row=0; row<lines; row++){
-        const symbols = rows[row];
-        let allSsame=true;
-        for(const symbol of symbols){
-            if(symbol != symbols[0]){
-                allSsame= false;
-                break;
-            }
-        }
-        if(allSsame){
-            winnings += bet * SYMBOLS_VALUES[symbols[0]];
-        }
+    for (let r = 0; r < lines; r++) {
+    const row = rows[r];
+    const first = row[0];
+    if (row.every(s => s === first)) {
+      winnings += betPerLine * SYMBOLS_VALUES[first];
+    }
     }
     return winnings;
 }
 
-const game=()=>{
-let deposit_value = deposit();
-while(true){
-    console.log(`Your balance is : ${deposit_value} $`  ) ;
-
-    let lines_count = getNumberOfLines();
-    let totalBet = getBet(deposit_value,lines_count);
-    let tmpBalance= deposit_value-totalBet;
-    let spin_result = spin();
-    let rowsToCol = transpose(spin_result);
-    printRows(rowsToCol);
-
-    let win_value = getWinnings(rowsToCol , lines_count , totalBet);
-    if(win_value){
-        console.log(`You won ${win_value} $`);
+function updateCellsFromReels(reels) {
+const colEls = Array.from(colsContainer.children);
+for (let c = 0; c < COLS; c++) {
+    const cells = Array.from(colEls[c].children);
+    for (let r = 0; r < ROWS; r++) {
+        cells[r].textContent = reels[c][r];
     }
-    else{
-        console.log(`You lost`);
-    }
-    tmpBalance += win_value;
-    deposit_value = tmpBalance;
-    console.log(`Your current balance now is : ${deposit_value} $`  ) ;
-
-    
-    const playAgain = prompt("Do u want to continue playing ? (y/n)");
-    if(playAgain != "y"){
-        // console.log(playAgain);
-        break;
-    }
-    }
-
+}
 }
 
+// remove any existing win highlights
+function clearHighlights() {
+    const colEls = Array.from(colsContainer.children);
+    for (let c = 0; c < COLS; c++) {
+    const cells = Array.from(colEls[c].children);
+    for (let r = 0; r < ROWS; r++) {
+        cells[r].classList.remove('win');
+    }
+}
+}
 
-game();
+// highlight rows that are winners (returns array of winning row indices)
+function highlightWinningRows(rows, lines) {
+    const winners = [];
+
+    for (let r = 0; r < lines; r++) {
+    const row = rows[r];
+    const first = row[0];
+    if (row.every(s => s === first)) {
+        winners.push(r);
+    }
+}
+
+if (winners.length === 0) return winners;
+
+    const colEls = Array.from(colsContainer.children);
+    for (const r of winners) {
+    for (let c = 0; c < COLS; c++) {
+        const cell = colEls[c].children[r];
+        if (cell) cell.classList.add('win');
+    }
+}
+return winners;
+}
+
+function animateSpin(finalReels) {
+    spinning = true;
+    spinBtn.disabled = true;
+    linesBtn.disabled = true;
+    betInput.disabled = true;
+    depositInput.disabled = true;
+
+    const colEls = Array.from(colsContainer.children);
+    const intervals = [];
+
+    for (let c = 0; c < COLS; c++) {
+    intervals[c] = setInterval(() => {
+      // show random symbols quickly
+        const cells = Array.from(colEls[c].children);
+        for (let r = 0; r < ROWS; r++) {
+        cells[r].textContent = SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
+        }
+    }, 80);
+}
+
+  // stop each column staggered
+    for (let c = 0; c < COLS; c++) {
+    setTimeout(() => {
+        clearInterval(intervals[c]);
+      // set final column
+        const cells = Array.from(colEls[c].children);
+        for (let r = 0; r < ROWS; r++) {
+        cells[r].textContent = finalReels[c][r];
+        }
+      // if last column, finish spin
+        if (c === COLS - 1) {
+            spinning = false;
+            spinBtn.disabled = false;
+            linesBtn.disabled = false;
+            betInput.disabled = false;
+            depositInput.disabled = false;
+        }
+    }, 700 + c * 300);
+}
+}
+
+function showMessage(text, type = 'info') {
+    messageEl.textContent = text;
+    messageEl.style.color = type === 'error' ? 'crimson' : type === 'win' ? 'green' : 'black';
+}
+
+function parseNumberInput(el, fallback = 0) {
+    const v = parseFloat(el.value);
+    return isNaN(v) ? fallback : v;
+}
+
+spinBtn.addEventListener('click', () => {
+    if (spinning) return;
+
+    let balance = parseNumberInput(depositInput, 0);
+    const betPerLine = Math.max(1, Math.floor(parseNumberInput(betInput, 1)));
+  const totalBet = betPerLine * linesCount;
+
+    if (balance < totalBet) {
+        showMessage('Insufficient balance for this bet.', 'error');
+        return;
+    }
+
+    balance -= totalBet;
+    depositInput.value = balance;
+    clearHighlights();
+    showMessage('Spinning...');
+
+    const finalReels = spinOnce();
+    animateSpin(finalReels);
+
+  // compute results after full spin finishes (wait until last column stops)
+    setTimeout(() => {
+        const rows = transpose(finalReels);
+        // clear previous highlights and add new ones if any
+        clearHighlights();
+        const winningRows = highlightWinningRows(rows, linesCount);
+
+        const winnings = getWinnings(rows, linesCount, betPerLine);
+        if (winnings > 0) {
+        // highlight rows visually and show message
+            showMessage(`You won $${winnings}!`, 'win');
+            balance += winnings;
+        } else {
+            showMessage('You lost this spin. Try again!', 'info');
+        }
+
+        // if there are winning rows, keep them highlighted; otherwise nothing to show
+        depositInput.value = balance;
+  }, 700 + (COLS - 1) * 300 + 50);
+});
+
+linesBtn.addEventListener('click', () => {
+    linesCount = (linesCount % 3) + 1; // cycles 1 -> 2 -> 3 -> 1
+    linesBtn.textContent = `x${linesCount}`;
+});
+
+// initial setup
+makeReelsDOM();
+showMessage('Set your balance and bet, then press Spin');
+
+// expose for debugging
+window._slot = { spinOnce, transpose, getWinnings };

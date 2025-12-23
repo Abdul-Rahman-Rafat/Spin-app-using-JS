@@ -7,15 +7,15 @@
 main{
     width: 40%;
     margin: auto;
-    margin-top: 10%;
-    height: 70vh;
-    max-height: 70vh;
+    margin-top: 1%;
+    height: 80vh;
+    max-height: 80vh;
     background: linear-gradient(#2c8ef0,#4ac6f1) ;
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
-    border: 10px #f6e47a solid;
+    border: 10px #f1ce05 solid;
     border-radius: 16px;
     box-shadow: rgb(194, 192, 192) 0 0 10px 0;
     padding: 10px 15px;
@@ -25,8 +25,8 @@ main{
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #ffc97c;
-    border: 10px #f6e47a solid;
+    color: #f1ce05;
+    border: 10px #f1ce05 solid;
     padding: 5px;
     border-radius: 16px;
     box-shadow:  gainsboro 0 0 10px 0;
@@ -43,7 +43,7 @@ main{
 }
 .col{
     flex-basis: 100%/3;
-    border: 10px #f8e05ae1 solid;
+    border: 10px #f1ce05 solid;
     padding: 20px;
     height: 30vh;
     border-radius: 16px;
@@ -66,6 +66,15 @@ justify-content: center;
     align-items: center;
     /* margin-bottom: 20px; */
 }
+.btns div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+label{
+    color: white;
+}
 button{
     cursor: pointer;
     transition: all .3s ease-in-out;
@@ -76,8 +85,8 @@ button:hover{
 }
 
 .deposit-input{
-    width: 40px;
-    padding: 5px;
+    width: 60px;
+    padding: 6px;
     text-align: center;
     border-radius: 8px;
     border: none;
@@ -85,7 +94,7 @@ button:hover{
     transition: all .3s ease-in-out;
 
 }
-.deposit-input:focus-within{
+input:focus-within{
     outline: none;
     scale: 1.2;
 }
@@ -110,4 +119,69 @@ button:hover{
     background-color: #f752cf;
     color: white;
     font-size: 16px;
+}
+
+/* new UI styles for slot cells and extra controls */
+.cell{
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 8px;
+    margin: 6px 0;
+    background-color: #f6f6f6;
+    border-radius: 8px;
+    color: #2c8ef0;
+    transition: background-color .18s ease, transform .12s ease;
+}
+
+/* highlight for winning cells */
+.cell.win{
+    background-color: #dff6df;
+    color: #0b7a0b;
+    box-shadow: 0 0 16px rgba(11,122,11,0.12);
+    transform: scale(1.04);
+}
+
+.bet-input{
+    width: 60px;
+    padding: 6px;
+    text-align: center;
+    border-radius: 8px;
+    border: none;
+    box-shadow: #2c8ef0 0 0 20px 0;
+    transition: all .3s ease-in-out;
+}
+
+.message{
+    width: 80%;
+    text-align: center;
+    margin: 8px auto;
+    padding: 6px 8px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 8px;
+    color: #333;
+    font-weight: 600;
+}
+
+
+
+@media(max-width:720px){
+    main{
+        width: 90%;
+        height: 90vh;
+        max-height: 90vh;
+}
+    .btns{
+    display: flex;
+    /* flex-wrap: wrap; */
+    gap: 20px;
+    align-items: center;
+    /* margin-bottom: 20px; */
+}
+    .btns button{
+        margin-top: 15px;
+    }
+    .lines-count-btn{
+        padding: 15px 5px ;
+    }
 }
