@@ -168,7 +168,7 @@ input:focus-within{
 
 
 
-@media(max-width:720px){
+@media(max-width:1080px){
     main{
         width: 90%;
         height: 90vh;
@@ -177,7 +177,7 @@ input:focus-within{
     .btns{
     display: flex;
     /* flex-wrap: wrap; */
-    gap: 20px;
+    gap: 40px;
     align-items: center;
     /* margin-bottom: 20px; */
 }
