@@ -1,0 +1,113 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main{
+    width: 40%;
+    margin: auto;
+    margin-top: 10%;
+    height: 70vh;
+    max-height: 70vh;
+    background: linear-gradient(#2c8ef0,#4ac6f1) ;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    border: 10px #f6e47a solid;
+    border-radius: 16px;
+    box-shadow: rgb(194, 192, 192) 0 0 10px 0;
+    padding: 10px 15px;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffc97c;
+    border: 10px #f6e47a solid;
+    padding: 5px;
+    border-radius: 16px;
+    box-shadow:  gainsboro 0 0 10px 0;
+}
+
+
+
+.cols{
+    display: flex;
+    /* border: 10px #f8e05ae1 solid; */
+    border-radius: 16px;
+    /* box-shadow:  black 0 0  10px 0; */
+    
+}
+.col{
+    flex-basis: 100%/3;
+    border: 10px #f8e05ae1 solid;
+    padding: 20px;
+    height: 30vh;
+    border-radius: 16px;
+    background-color: white;
+
+}
+
+
+.spin-container{
+display: flex;
+flex-direction: column;
+gap: 80px;
+align-items: center;
+justify-content: center;
+}
+
+.btns{
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    /* margin-bottom: 20px; */
+}
+button{
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+button:hover{
+    scale: 1.1;
+    box-shadow: #2c8ef0 0 0 50px 0;
+}
+
+.deposit-input{
+    width: 40px;
+    padding: 5px;
+    text-align: center;
+    border-radius: 8px;
+    border: none;
+    box-shadow: #2c8ef0 0 0 20px 0;
+    transition: all .3s ease-in-out;
+
+}
+.deposit-input:focus-within{
+    outline: none;
+    scale: 1.2;
+}
+.spin-btn{
+    
+    padding: 15px 25px;
+    border-radius: 16px;
+    border: none;
+    background:linear-gradient(#9af116,#3cbb00);
+    box-shadow: #2c8ef0 0 0 20px 0;
+    color: white;
+    font-size: 32px;
+
+}
+.lines-count-btn{
+    width: 40px;
+    padding: 10px 5px;
+    text-align: center;
+    border-radius: 8px;
+    border: none;
+    box-shadow: #2c8ef0 0 0 20px 0;
+    background-color: #f752cf;
+    color: white;
+    font-size: 16px;
+}
