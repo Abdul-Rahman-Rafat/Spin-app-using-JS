@@ -159,14 +159,25 @@ while(true){
     printRows(rowsToCol);
 
     let win_value = getWinnings(rowsToCol , lines_count , totalBet);
+    if(win_value){
+        console.log(`You won ${win_value} $`);
+    }
+    else{
+        console.log(`You lost`);
+    }
     tmpBalance += win_value;
     deposit_value = tmpBalance;
-    console.log(`Your balance now is : ${deposit_value} $`  ) ;
+    console.log(`Your current balance now is : ${deposit_value} $`  ) ;
 
     
     const playAgain = prompt("Do u want to continue playing ? (y/n)");
-    if(playAgain != "y" || playAgain !="Y" || playAgain!= "yes" || playAgain!= "YES")
+    if(playAgain != "y"){
+        // console.log(playAgain);
         break;
+    }
     }
 
 }
+
+
+game();
