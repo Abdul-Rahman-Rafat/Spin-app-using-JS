@@ -511,7 +511,11 @@ button:hover{
         width: 90%;
         height: 90vh;
         max-height: 90vh;
+
 }
+    .spin-container{
+    gap: 60px;
+    }
     .btns{
     display: flex;
     gap: 20px;
@@ -559,6 +563,17 @@ button:hover{
     .cell{
         font-size: 24px;
         
+    }
+    #themeBtn{
+        top: 20px;
+        left: 10px;
+        padding: 8px 10px;
+        /* font-size: 14px; */
+        background: none;
+        box-shadow: none;
+    }
+    #themeBtn span{
+        display: none;
     }
 
 }
