@@ -514,10 +514,8 @@ button:hover{
 }
     .btns{
     display: flex;
-    /* flex-wrap: wrap; */
-    gap: 25px;
+    gap: 20px;
     align-items: center;
-    /* margin-bottom: 20px; */
 }
     
     .lines-count-btn{
@@ -525,7 +523,7 @@ button:hover{
     }
     .spin-btn{
         padding: 12px 20px;
-        font-size: 24px;
+        font-size: 20px;
     }
     .success_order .order-confirmedName-msg{
         padding: 20px 0;
@@ -553,6 +551,14 @@ button:hover{
     }
     .ri-information-line::after{
         content: "";
+    }
+
+    label{
+        font-size: 14px;
+    }
+    .cell{
+        font-size: 24px;
+        
     }
 
 }
