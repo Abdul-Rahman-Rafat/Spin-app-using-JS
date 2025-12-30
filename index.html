@@ -6,10 +6,12 @@
     <title>Spin</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     
     <main>
+        
         <div class="spin-container">
             <div class="header">
                 <i class="ri-checkbox-blank-circle-fill"></i>
@@ -34,11 +36,30 @@
                 <button class="spin-btn">Spin</button>
                 <button class="lines-count-btn">x1</button>
             </div>
-
+            <i class="ri-information-line"></i>
+            <div class="infoDiv">
+                <h2>How to play?</h2>
+                <p>1. Deposit an amount to start playing.</p>
+                <p>2. Set your bet per line using the 'Bet / line' input.</p>
+                <p>3. Click the 'Spin' button to spin the reels.</p>
+                <p>4. The game will automatically calculate your winnings <br> based on the symbols that align on the paylines.</p>
+                <p>5. You can adjust the number of active paylines by clicking the 'x1' button.</p>
+                <p>6. Enjoy the game and try your luck!</p>
+            </div>
+            <button id="themeBtn">Switch Theme <i class="ri-toggle-fill"></i> </button>
         </div>
+
+        <canvas id="confetti"></canvas>
+
+        <div class="overlay">
+        </div>
+        <div class="success_order">
+        </div>
+
+        
     </main>
 
-
+<audio id="winSound" src="win.mp3" preload="auto"></audio>
 
 </body>
 <script src="project.js"></script>

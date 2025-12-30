@@ -1,3 +1,6 @@
+document.body.classList.add("valorant");
+
+
 // machine size
 const ROWS = 3;
 const COLS = 3;
@@ -214,10 +217,86 @@ spinBtn.addEventListener('click', () => {
 
         const winnings = getWinnings(rows, linesCount, betPerLine);
         if (winnings > 0) {
-        // highlight rows visually and show message
-            showMessage(`You won $${winnings}!`, 'win');
-            balance += winnings;
-        } else {
+    showMessage(`You won $${winnings}!`, 'win');
+
+    const winSound = document.getElementById("winSound");
+    if (winSound) {
+        winSound.currentTime = 0;
+        winSound.play().catch(()=>{});
+    }
+
+    fireConfetti();
+
+    const raedBD = document.querySelector(".success_order");
+    const overlay = document.querySelector(".overlay");
+
+    overlay.classList.add("active");
+
+    // Loading state
+    raedBD.innerHTML = `
+        <div class="order-confirmedName-msg">
+            <p class="confirmedName">🎉 HBD , Raedoda 🎉</p>
+            <p class="cook-text loading">Cooking your gift… 🧪🔥</p>
+            <p class="hintMsg"> Guess it . a hint will be given in 4s </p>
+        </div>
+    `;
+    raedBD.classList.add("showMsg");
+    setTimeout(() => {
+            raedBD.style.background = "url('lol valo.png')";
+            raedBD.style.backgroundSize = "cover";
+            document.querySelector(".hintMsg").remove();
+        }, 5000);
+    // Reveal gift after delay
+    setTimeout(() => {
+        raedBD.innerHTML = `
+            <div class="order-confirmedName-msg">
+                <p class="confirmedName">🎉 HBD , Raedoda 🎉</p>
+                <p class="order-confirmed_P">Your Gift Is a RP Code in Valo Or LOL</p>
+
+                <div class="container">
+                    <input id="textToCopy" value="RA-EGTEAZTUGHXWGE9U" readonly>
+                    <i id="copyButton" class="ri-file-copy-line"></i>
+                </div>
+
+                <p class="cook-text2">it's just one code don't spin it again, ass face</p>
+                
+            </div>
+            <i class="ri-close-line"></i>
+        `;
+        
+
+        const copyText = document.getElementById("textToCopy");
+        const copyButton = document.getElementById("copyButton");
+
+        if (!copyButton) return;
+
+        copyButton.addEventListener("click", async () => {
+            await navigator.clipboard.writeText(copyText.value);
+            copyButton.classList.remove("ri-file-copy-line");
+            copyButton.classList.add("ri-clipboard-line");
+
+            setTimeout(() => {
+
+                copyButton.classList.remove("ri-clipboard-line");
+                copyButton.classList.add("ri-file-copy-line");
+            }, 1200);
+        });
+
+        let closex = document.querySelector(".ri-close-line");
+        closex.addEventListener("click", () => {
+            overlay.remove();
+            raedBD.remove();
+            document.querySelector(".spin-container").appendChild(document.createElement("p")).className = "cook-text2";
+            document.querySelector(".cook-text2").textContent = "it's just one code don't spin it again, ass face";
+
+    
+        });
+    }, 15000);
+            
+
+    balance += winnings;
+}
+     else {
             showMessage('You lost this spin. Try again!', 'info');
         }
 
@@ -237,3 +316,49 @@ showMessage('Set your balance and bet, then press Spin');
 
 // expose for debugging
 window._slot = { spinOnce, transpose, getWinnings };
+
+
+
+function fireConfetti() {
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const pieces = Array.from({ length: 120 }).map(() => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        size: Math.random() * 6 + 4,
+        speed: Math.random() * 3 + 2,
+        color: `hsl(${Math.random() * 360},100%,50%)`
+    }));
+
+    function animate() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        pieces.forEach(p => {
+            p.y += p.speed;
+            ctx.fillStyle = p.color;
+            ctx.fillRect(p.x, p.y, p.size, p.size);
+        });
+        requestAnimationFrame(animate);
+    }
+    animate();
+
+    setTimeout(() => ctx.clearRect(0,0,canvas.width,canvas.height), 10000);
+}
+
+
+let info = document.querySelector(".ri-information-line");
+let infoDiv = document.querySelector(".infoDiv");
+info.addEventListener("click", () => {
+    infoDiv.classList.toggle("showInfo");
+});
+
+let themeBtn = document.getElementById("themeBtn");
+let switch_icon = document.querySelector(".ri-toggle-fill");
+themeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("lol");
+    switch_icon.classList.toggle("ri-toggle-line");
+    
+});

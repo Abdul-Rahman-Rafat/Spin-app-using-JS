@@ -1,7 +1,37 @@
+body.valorant{
+  --bg-main: radial-gradient(circle at top, #1f2326, #0f1923);
+  --primary: #ff4655;
+  --secondary: #00f0ff;
+  --card-bg: rgba(15,25,35,.85);
+  --text-main: #ffffff;
+}
+
+body.lol{
+  --bg-main: radial-gradient(circle at top, #0a1428, #091428);
+  --primary: #c89b3c;
+  --secondary: #0ac8b9;
+  --card-bg: rgba(10,20,40,.9);
+  --text-main: #f0e6d2;
+}
+
+
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body{
+    /* background: linear-gradient(#1a1a1a, #000000),  no-repeat center center/cover; */
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--bg-main);
+    color: var(--text-main);
 }
 
 main{
@@ -10,15 +40,20 @@ main{
     margin-top: 1%;
     height: 90vh;
     max-height: 90vh;
-    background: linear-gradient(#2c8ef0,#4ac6f1) ;
+    /* background: linear-gradient(#2c8ef0,#4ac6f1) ; */
+    background: var(--card-bg);
+    border: 3px solid var(--primary);
+
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
-    border: 10px #f1ce05 solid;
+    /* border: 10px #f1ce05 solid; */
     border-radius: 16px;
     box-shadow: rgb(194, 192, 192) 0 0 10px 0;
     padding: 10px 15px;
+
+    position: relative;
 }
 
 .header{
@@ -83,8 +118,8 @@ button{
     transition: all .3s ease-in-out;
 }
 button:hover{
-    scale: 1.1;
-    box-shadow: #2c8ef0 0 0 50px 0;
+    box-shadow: 0 0 40px var(--secondary);
+
 }
 
 .deposit-input{
@@ -97,7 +132,7 @@ button:hover{
     transition: all .3s ease-in-out;
 
 }
-input:focus-within{
+.spin-container input:focus-within{
     outline: none;
     scale: 1.2;
 }
@@ -106,12 +141,15 @@ input:focus-within{
     padding: 15px 25px;
     border-radius: 16px;
     border: none;
-    background:linear-gradient(#9af116,#3cbb00);
-    box-shadow: #2c8ef0 0 0 20px 0;
+    /* background:linear-gradient(#9af116,#3cbb00);
+    box-shadow: #2c8ef0 0 0 20px 0; */
     color: white;
     font-size: 32px;
 
+    background: var(--primary);
+    box-shadow: 0 0 20px var(--primary);
 }
+
 .lines-count-btn{
     width: 40px;
     padding: 15px 5px ;
@@ -166,6 +204,306 @@ input:focus-within{
     font-weight: 600;
 }
 
+
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 901;
+}
+
+.overlay.active{
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.success_order{
+    position: fixed;
+    margin: auto;
+    width: 0rem;
+    height: 0vh;
+    opacity: 0;
+
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(0, 0, 0, 0.8);
+    /* background: url(lol\ valo.png) ; */
+    background-size: cover;
+    border: 1px white solid;
+    border-radius: 8px;
+    padding: var(--Padding-5);
+    transition: all .3s ease-in-out;
+    z-index: 902;
+    box-shadow: gainsboro 0 0 10px 0;
+}
+
+
+
+.success_order .order-confirmedName-msg {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+
+    background: linear-gradient(
+    rgba(0,0,0,.75),
+    rgba(0,0,0,.75));
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 40px var(--primary);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+
+.success_order .order-confirmedName {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+
+
+.success_order.showMsg{
+    width: 50rem;
+    height: 50vh;
+    opacity: 100;
+}
+
+
+
+
+
+
+
+
+.confirmedName{
+    
+    padding: 15px 25px;
+    border-radius: 16px;
+    border: none;
+    background:rgba(18, 34, 51, 0.8);
+    box-shadow: #123 0 0 20px 0;
+    color: white;
+    font-size: 28px;
+
+}
+
+.order-confirmed_P{
+    margin-top: 20px;
+    color: white;
+    font-size: 32px;
+    text-align: center;
+    background: rgba(0,0,0,.3);
+    padding: 12px 16px;
+}
+
+
+.container {
+    background: rgba(255,255,255,.1);
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+#textToCopy {
+    padding: 10px 6px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    width: 92%;
+    /* margin-right: 10px; */
+    background-color: transparent;
+    color: var(--secondary);
+
+}
+#textToCopy:focus {
+    outline: none;
+}
+
+
+#copyButton {
+    padding: 10px 10px;
+    font-size: 20px;
+    /* background-color: rgb(75, 170, 12); */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+#copyButton:hover {
+    background-color: gainsboro;
+    color: #000;
+}
+#textToCopy{
+    background: transparent;
+    border: none;
+    color: #11da21;
+    font-size: 24px;
+    letter-spacing: 2px;
+    width: 340px;
+}
+/* 
+#copyButton.copied {
+    
+} */
+
+#confetti{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.loading{
+    font-size: 24px;
+    letter-spacing: 3px;
+    animation: pulse 1.2s infinite;
+}
+.cook-text{
+    font-size: 20px;
+    margin-top: 10px;
+    color: #fff;
+    animation: pulse 1.2s infinite;
+}
+.hintMsg{
+    font-size: 16px;
+    margin-top: 10px;
+    color: #fff;
+    animation: pulse 1.2s infinite;
+}
+.cook-text2{
+    font-size: 10px;
+    margin-top: 10px;
+    color: #fff;
+    animation: pulse 1.2s infinite;
+}
+@keyframes pulse{
+    0%{opacity:.3}
+    50%{opacity:1}
+    100%{opacity:.3}
+}
+
+
+.ri-information-line{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 32px;
+    color: #f1ce05;
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform .3s ease-in-out;
+}
+.ri-information-line:hover{
+    transform: scale(1.2);
+
+}
+.infoDiv{
+    position: absolute;
+    top: 70px;
+    right: 20%;
+    transform: translateX(50%);
+    background: rgba(0,0,0,.7);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease-in-out;
+    z-index: 1000;
+}
+.infoDiv.showInfo{
+    opacity: 1;
+}
+.closeInfo{
+    position: absolute;
+    top: 2px;
+    right: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+.ri-information-line::after{
+    content: "Click to know how to play the game ? ";
+    position: absolute;
+    bottom: 40px;
+    right: 50%;
+    transform: translateX(50%);
+    background: rgba(0,0,0,.7);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease-in-out;
+}
+.ri-information-line:hover::after{
+    opacity: 1;
+}
+
+.ri-close-line{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 32px;
+    color: #f1ce05;
+    cursor: pointer;
+    z-index: 1001;
+    transition: transform .3s ease-in-out;
+}
+
+#themeBtn{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    background: var(--primary);
+    box-shadow: 0 0 20px var(--primary);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    z-index: 1000;
+}
+
+#themeBtn:hover{
+    transform: scale(1.1);
+}
+
+#themeBtn i{
+    margin-left: 8px;
+    font-size: 20px;
+}
 
 
 @media(max-width:1080px){
