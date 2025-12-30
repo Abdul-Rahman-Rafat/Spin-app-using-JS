@@ -254,11 +254,11 @@ spinBtn.addEventListener('click', () => {
                 <p class="order-confirmed_P">Your Gift Is a RP Code in Valo Or LOL</p>
 
                 <div class="container">
-                    <input id="textToCopy" value="RA-EGTEAZTUGHXWGE9U" readonly>
+                    <input id="textToCopy" value="safasfsafsafafs" readonly>
                     <i id="copyButton" class="ri-file-copy-line"></i>
                 </div>
 
-                <p class="cook-text2">it's just one code don't spin it again, ass face</p>
+                <p class="cook-text2">it's just one code don't spin it again, a$$ face</p>
                 
             </div>
             <i class="ri-close-line"></i>
@@ -287,7 +287,7 @@ spinBtn.addEventListener('click', () => {
             overlay.remove();
             raedBD.remove();
             document.querySelector(".spin-container").appendChild(document.createElement("p")).className = "cook-text2";
-            document.querySelector(".cook-text2").textContent = "it's just one code don't spin it again, ass face";
+            document.querySelector(".cook-text2").textContent = "it's just one code don't spin it again, a$$ face";
 
     
         });

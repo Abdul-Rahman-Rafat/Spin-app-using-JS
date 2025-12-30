@@ -477,8 +477,8 @@ button:hover{
 
 #themeBtn{
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 90px;
+    margin: auto;
     padding: 10px 15px;
     border-radius: 8px;
     border: none;
@@ -493,7 +493,7 @@ button:hover{
     align-items: center;
     justify-content: center;
     gap: 10px;
-    z-index: 1000;
+    z-index: 900;
 }
 
 #themeBtn:hover{
@@ -515,7 +515,7 @@ button:hover{
     .btns{
     display: flex;
     /* flex-wrap: wrap; */
-    gap: 40px;
+    gap: 25px;
     align-items: center;
     /* margin-bottom: 20px; */
 }
@@ -523,4 +523,36 @@ button:hover{
     .lines-count-btn{
         padding: 15px 5px ;
     }
+    .spin-btn{
+        padding: 12px 20px;
+        font-size: 24px;
+    }
+    .success_order .order-confirmedName-msg{
+        padding: 20px 0;
+        border: none;
+        box-shadow: none;
+    }
+    .container{
+        width: 95%;
+        display: flex;
+    }
+    #textToCopy{
+        width: 240px;
+        font-size: 17px;
+        flex: 2 ;
+    }
+    .success_order.showMsg{
+        width: 90%;
+        height: 60vh;
+        opacity: 1;
+        
+    }
+    .infoDiv{
+        right: 50%;
+        transform: translateX(50%);
+    }
+    .ri-information-line::after{
+        content: "";
+    }
+
 }
