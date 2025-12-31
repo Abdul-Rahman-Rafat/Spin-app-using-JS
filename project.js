@@ -235,7 +235,7 @@ spinBtn.addEventListener('click', () => {
     // Loading state
     raedBD.innerHTML = `
         <div class="order-confirmedName-msg">
-            <p class="confirmedName">🎉 HBD , Raedoda 🎉</p>
+            <p class="confirmedName">🎉 HBD, Raedoda 🎉</p>
             <p class="cook-text loading">Cooking your gift… 🧪🔥</p>
             <p class="hintMsg"> Guess it . a hint will be given in 4s </p>
         </div>
@@ -245,12 +245,12 @@ spinBtn.addEventListener('click', () => {
             raedBD.style.background = "url('lol valo.png')";
             raedBD.style.backgroundSize = "cover";
             document.querySelector(".hintMsg").remove();
-        }, 5000);
+        }, 7000);
     // Reveal gift after delay
     setTimeout(() => {
         raedBD.innerHTML = `
             <div class="order-confirmedName-msg">
-                <p class="confirmedName">🎉 HBD , Raedoda 🎉</p>
+                <p class="confirmedName">🎉 HBD , Raedaoda 🎉</p>
                 <p class="order-confirmed_P">Your Gift Is a RP Code in Valo Or LOL</p>
 
                 <div class="container">
@@ -291,7 +291,7 @@ spinBtn.addEventListener('click', () => {
 
     
         });
-    }, 15000);
+    }, 20000);
             
 
     balance += winnings;
