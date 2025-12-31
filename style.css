@@ -1,17 +1,17 @@
 body.valorant{
-  --bg-main: radial-gradient(circle at top, #1f2326, #0f1923);
-  --primary: #ff4655;
-  --secondary: #00f0ff;
-  --card-bg: rgba(15,25,35,.85);
-  --text-main: #ffffff;
+    --bg-main: radial-gradient(circle at top, #1f2326, #0f1923);
+    --primary: #ff4655;
+    --secondary: #00f0ff;
+    --card-bg: rgba(15,25,35,.85);
+    --text-main: #ffffff;
 }
 
 body.lol{
-  --bg-main: radial-gradient(circle at top, #0a1428, #091428);
-  --primary: #c89b3c;
-  --secondary: #0ac8b9;
-  --card-bg: rgba(10,20,40,.9);
-  --text-main: #f0e6d2;
+    --bg-main: radial-gradient(circle at top, #0a1428, #091428);
+    --primary: #c89b3c;
+    --secondary: #0ac8b9;
+    --card-bg: rgba(10,20,40,.9);
+    --text-main: #f0e6d2;
 }
 
 
@@ -60,11 +60,11 @@ main{
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #f1ce05;
-    border: 10px #f1ce05 solid;
+    color: var(--primary);
+    border: 10px var(--primary) solid;
     padding: 5px;
     border-radius: 16px;
-    box-shadow:  gainsboro 0 0 10px 0;
+    box-shadow: gainsboro 0 0 10px 0;
 }
 
 
@@ -78,7 +78,7 @@ main{
 }
 .col{
     flex-basis: 100%/3;
-    border: 10px #f1ce05 solid;
+    border: 10px var(--primary) solid;
     padding: 20px;
     height: 30vh;
     border-radius: 16px;
@@ -156,8 +156,8 @@ button:hover{
     text-align: center;
     border-radius: 8px;
     border: none;
-    box-shadow: #2c8ef0 0 0 20px 0;
-    background-color: #f752cf;
+    box-shadow: var(--secondary) 0 0 10px 0;
+    background-color: var(--secondary);
     color: white;
     font-size: 16px;
 }
@@ -189,7 +189,7 @@ button:hover{
     text-align: center;
     border-radius: 8px;
     border: none;
-    box-shadow: #2c8ef0 0 0 20px 0;
+    box-shadow: var(--secondary) 0 0 20px 0;
     transition: all .3s ease-in-out;
 }
 
@@ -407,7 +407,7 @@ button:hover{
     top: 20px;
     right: 20px;
     font-size: 32px;
-    color: #f1ce05;
+    color: var(--primary);
     cursor: pointer;
     z-index: 1000;
     transition: transform .3s ease-in-out;

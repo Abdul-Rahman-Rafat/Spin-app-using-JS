@@ -254,7 +254,7 @@ spinBtn.addEventListener('click', () => {
                 <p class="order-confirmed_P">Your Gift Is a RP Code in Valo Or LOL</p>
 
                 <div class="container">
-                    <input id="textToCopy" value="safasfsafsafafs" readonly>
+                    <input id="textToCopy" value="RA-EGTEAZTUGHXWGE9U" readonly>
                     <i id="copyButton" class="ri-file-copy-line"></i>
                 </div>
 
