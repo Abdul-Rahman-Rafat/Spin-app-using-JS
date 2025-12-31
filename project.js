@@ -237,7 +237,7 @@ spinBtn.addEventListener('click', () => {
         <div class="order-confirmedName-msg">
             <p class="confirmedName">🎉 HBD, Raedoda 🎉</p>
             <p class="cook-text loading">Cooking your gift… 🧪🔥</p>
-            <p class="hintMsg"> Guess it . a hint will be given in 4s </p>
+            <p class="hintMsg"> Guess it . a hint will be given in 5 secs </p>
         </div>
     `;
     raedBD.classList.add("showMsg");
@@ -258,7 +258,7 @@ spinBtn.addEventListener('click', () => {
                     <i id="copyButton" class="ri-file-copy-line"></i>
                 </div>
 
-                <p class="cook-text2">it's just one code don't spin it again, a$$ face</p>
+                <p class="cook-text2">it's just one code don't spin it again, bro 😂</p>
                 
             </div>
             <i class="ri-close-line"></i>
@@ -287,7 +287,7 @@ spinBtn.addEventListener('click', () => {
             overlay.remove();
             raedBD.remove();
             document.querySelector(".spin-container").appendChild(document.createElement("p")).className = "cook-text2";
-            document.querySelector(".cook-text2").textContent = "it's just one code don't spin it again, a$$ face";
+            document.querySelector(".cook-text2").textContent = "it's just one code don't spin it again, bro 😂";
 
     
         });
